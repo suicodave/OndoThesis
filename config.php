@@ -1,10 +1,10 @@
 <?php
 session_start();
 $url = parse_url(getenv("JAWSDB_URL"));
-$host = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$database = substr($url["path"], 1);
+$host = '	g8r9w9tmspbwmsyo.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
+$username = 'ra9crw5ngtoqh5it';
+$password = 'rqn336n6a781keyx';
+$database = 'vyo6kqeav67znjtr';
 
 
 mysql_connect($host, $username, $password) or die(mysql_error());
