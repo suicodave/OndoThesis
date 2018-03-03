@@ -39,7 +39,7 @@
                     <select name="subject" class="form-control" required>
                         <option value="">Select Subject...</option>
                     <?php 
-                        $r = mysqli_query("select * from subject");
+                        $r = mysqli_query($con,"select * from subject");
                         while($row = mysqli_fetch_array($r)):
                     ?>
                         <option value="<?php echo $row['code']; ?>"><?php echo $row['code']; ?> - (<?php echo $row['title']; ?>)</option>

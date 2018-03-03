@@ -1,24 +1,24 @@
 <?php
-    include('include/header.php');
-    include('include/sidebar.php');
+include('include/header.php');
+include('include/sidebar.php');
+include('../config.php');
+$tmp = $_SESSION['id'];
+$q = "select * from teacher where teachid='$tmp'";
+$r = mysqli_query($con,$q);
+$result = mysqli_fetch_array($r);
+$teachid = $result[0];
 
-    $tmp = $_SESSION['id'];
-    $q = "select * from teacher where teachid='$tmp'";
-    $r = mysqli_query($q);
-    $result = mysqli_fetch_array($r);
-    $teachid = $result[0];
+$r1 = mysqli_query($con,"select count(*) from class where teacher=$teachid");
+$count1 = mysqli_fetch_array($r);
 
-    $r1 = mysqli_query("select count(*) from class where teacher=$teachid");
-    $count1 = mysqli_fetch_array($r);
-
-    $r2 = mysqli_query("select * from class where teacher=$teachid");
-    $students = 0;
-    while($row = mysqli_fetch_array($r)){
-        $id = $row['id'];   
-        $r3 = mysqli_query("select count(*) from studentsubject where classid=$id");
-        $count3 = mysqli_fetch_array($r3);
-        $students = $students + $count3[0];
-    }
+$r2 = mysqli_query($con,"select * from class where teacher=$teachid");
+$students = 0;
+while ($row = mysqli_fetch_array($r)) {
+    $id = $row['id'];
+    $r3 = mysqli_query($con,"select count(*) from studentsubject where classid=$id");
+    $count3 = mysqli_fetch_array($r3);
+    $students = $students + $count3[0];
+}
 
 ?>
 <div id="page-wrapper">
@@ -49,7 +49,7 @@
                                 <i class="fa fa-bar-chart-o fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge"><?php echo $count1[0];?></div>
+                                <div class="huge"><?php echo $count1[0]; ?></div>
                                 <div>Subjects!</div>
                             </div>
                         </div>

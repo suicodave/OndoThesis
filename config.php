@@ -7,6 +7,6 @@ $password = 'rqn336n6a781keyx';
 $database = 'vyo6kqeav67znjtr';
 
 
-mysqli_connect($host, $username, $password,$database) or die(mysqli_error());
+$con =mysqli_connect($host, $username, $password,$database) or die(mysqli_error());
 
 ?>

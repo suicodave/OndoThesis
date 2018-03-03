@@ -1,16 +1,17 @@
 <?php
     include('include/header.php');
     include('include/sidebar.php');  
-    $r1 = mysqli_query('select count(*) from student');
+    include('../config.php');
+    $r1 = mysqli_query($con,'select count(*) from student');
     $count1 = mysqli_fetch_array($r1);
 
-    $r2 = mysqli_query('select count(*) from subject');
+    $r2 = mysqli_query($con,'select count(*) from subject');
     $count2 = mysqli_fetch_array($r2);
 
-    $r3 = mysqli_query('select count(*) from teacher');
+    $r3 = mysqli_query($con,'select count(*) from teacher');
     $count3 = mysqli_fetch_array($r3);
 
-    $r4 = mysqli_query('select count(*) from userdata');
+    $r4 = mysqli_query($con,'select count(*) from userdata');
     $count4 = mysqli_fetch_array($r4);
 ?>
 <div id="page-wrapper">    

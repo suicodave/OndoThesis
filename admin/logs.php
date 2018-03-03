@@ -1,6 +1,7 @@
 <?php
     include('include/header.php');
     include('include/sidebar.php');
+    include('../config.php');
 ?>
 <div id="page-wrapper">
 
@@ -31,7 +32,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="list-group">
-                            <?php $r = mysqli_query("select * from log order by date desc limit 0,100");?>
+                            <?php $r = mysqli_query($con,"select * from log order by date desc limit 0,100");?>
 
                             <?php while($row = mysqli_fetch_array($r)): ?>       
                             <a href="#" class="list-group-item">

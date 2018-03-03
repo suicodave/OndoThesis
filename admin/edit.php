@@ -5,6 +5,7 @@
     include('data/class_model.php');
     include('data/student_model.php');
     include('data/teacher_model.php');
+    include('../config.php');
     $id = $_GET['id'];
     $subject = $data->getsubjectbyid($id);
     $class = $class->getclassbyid($id);
@@ -110,7 +111,7 @@ class Edit {
                     <select name="subject" class="form-control" required>
                         <option value="">Select Subject...</option>
                     <?php 
-                        $r = mysqli_query("select * from subject");
+                        $r = mysqli_query($con,"select * from subject");
                         while($re = mysqli_fetch_array($r)):
                     ?>  
                         <option <?php  if($row['subject'] == $re['code']) echo "selected"?> value="<?php echo $re['code']; ?>"><?php echo $re['code']; ?> - (<?php echo $re['title']; ?>)</option>

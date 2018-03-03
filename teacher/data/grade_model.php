@@ -26,7 +26,7 @@
         function logs($act){            
             $date = date('m-d-Y h:i:s A');
             echo $q = "insert into log values(null,'$date','$act')";   
-            mysqli_query($q);
+            mysqli_query($con,$q);
             return true;
         }
         
@@ -36,7 +36,7 @@
             $project = $_POST['project1'];
             $exam = $_POST['exam1'];            
             $q = "update studentsubject set att1=$att, quiz1=$quiz, project1=$project, exam1=$exam where studid=$studid and classid=$classid";
-            mysqli_query($q);
+            mysqli_query($con,$q);
             $term = 'prelim';
             $this->createlog($studid,$classid,$term);
                         
@@ -49,7 +49,7 @@
             $project = $_POST['project2'];
             $exam = $_POST['exam2'];            
             $q = "update studentsubject set att2=$att, quiz2=$quiz, project2=$project, exam2=$exam where studid=$studid and classid=$classid";
-            mysqli_query($q);
+            mysqli_query($con,$q);
             $term = 'midterm';
             $this->createlog($studid,$classid,$term);
             header('location:../calculate.php?studid='.$studid.'&classid='.$classid.'&status=1');
@@ -61,7 +61,7 @@
             $project = $_POST['project3'];
             $exam = $_POST['exam3'];            
             $q = "update studentsubject set att3=$att, quiz3=$quiz, project3=$project, exam3=$exam where studid=$studid and classid=$classid";
-            mysqli_query($q);
+            mysqli_query($con,$q);
             $term = 'semifinal';
             $this->createlog($studid,$classid,$term);
             header('location:../calculate.php?studid='.$studid.'&classid='.$classid.'&status=1');
@@ -73,18 +73,18 @@
             $project = $_POST['project4'];
             $exam = $_POST['exam4'];            
             $q = "update studentsubject set att4=$att, quiz4=$quiz, project4=$project, exam4=$exam where studid=$studid and classid=$classid";
-            mysqli_query($q);
+            mysqli_query($con,$q);
             $term = 'final';
             $this->createlog($studid,$classid,$term);
             header('location:../calculate.php?studid='.$studid.'&classid='.$classid.'&status=1');
         }
         
         function createlog($studid,$classid,$term){
-            $student = mysqli_query("select * from student where id=$studid");
+            $student = mysqli_query($con,"select * from student where id=$studid");
             $student = mysqli_fetch_array($student);
             $student = $student['fname'].' '.$student['lname'];
             
-            $subject = mysqli_query("select * from class where id=$classid");
+            $subject = mysqli_query($con,"select * from class where id=$classid");
             $subject = mysqli_fetch_array($subject);
             $subject = $subject['subject'];
             

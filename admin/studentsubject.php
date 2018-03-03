@@ -3,7 +3,7 @@
     include('include/sidebar.php');
     include('data/student_model.php');
     include('data/data_model.php');
-    
+    include('../config.php');
     $id = $_GET['id'];
     $student = $student->getstudentbyid($id);
 ?>
@@ -51,11 +51,11 @@
                     </thead>
                     <tbody>
 <?php
-    $r1 = mysqli_query("select * from studentsubject where studid=$id");
+    $r1 = mysqli_query($con,"select * from studentsubject where studid=$id");
     while($row = mysqli_fetch_array($r1)):
-        $r2 = mysqli_query('select * from class where id='.$row['classid'].'');
+        $r2 = mysqli_query($con,'select * from class where id='.$row['classid'].'');
         while($rows = mysqli_fetch_array($r2)):
-            $r3 = mysqli_query('select * from teacher where id='.$rows['teacher'].'');
+            $r3 = mysqli_query($con,'select * from teacher where id='.$rows['teacher'].'');
             $teacher = null;
             if($r3){
                  $teacher = mysqli_fetch_array($r3);

@@ -1,4 +1,5 @@
 <?php
+    include('../../config.php');
     $student = new Datastudent();
     if(isset($_GET['q'])){
         $function = $_GET['q'];
@@ -15,12 +16,12 @@
         
         function getstudentbyclass($classid){
             $q = "select * from studentsubject where classid=$classid";
-            $r = mysqli_query($q);
+            $r = mysqli_query($con,$q);
             $student = array();
             if($classid != null){
                while($row = mysqli_fetch_array($r)){
                     $q2 = 'select * from student where id='.$row['studid'].'';  
-                    $r2 = mysqli_query($q2);
+                    $r2 = mysqli_query($con,$q2);
                     $student[] = mysqli_fetch_array($r2);    
                 } 
             }
@@ -29,11 +30,11 @@
         
         function getstudentbysearch($classid,$search){
             $q = "select * from student where fname like '%$search%' or lname like '%$search%' or studid like '%$search%'";
-            $r = mysqli_query($q);
+            $r = mysqli_query($con,$q);
             $student = array();
             while($row = mysqli_fetch_array($r)){
                 $q2 = 'select * from studentsubject where studid='.$row['id'].' and classid='.$classid.'';  
-                $r2 = mysqli_query($q2);
+                $r2 = mysqli_query($con,$q2);
                 if(mysqli_num_rows($r2) > 0) {
                     $student[] = $row;
                 }
@@ -44,7 +45,7 @@
         
         function getstudentgrade($studid,$classid){
             $q = "select * from studentsubject where studid='$studid' and classid='$classid'";
-            $r = mysqli_query($q);
+            $r = mysqli_query($con,$q);
             if($row = mysqli_fetch_array($r)){
                 $att1 = ($row['att1']) * .10;   
                 $att2 = ($row['att2']) * .10;   
@@ -108,7 +109,7 @@
         
         function getstudentbyid($studid){
             $q = "select * from student where id=$studid";   
-            $r = mysqli_query($q);
+            $r = mysqli_query($con,$q);
             $data = array();
             $data[] = mysqli_fetch_array($r);
             return $data;

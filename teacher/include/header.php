@@ -8,7 +8,7 @@
     }
     $id = $_SESSION['id'];
     $q = "select * from teacher where teachid='$id'";
-    $r = mysqli_query($q);
+    $r = mysqli_query($con,$q);
     if($row = mysqli_fetch_array($r)){
         $id = $row['id'];   
     }

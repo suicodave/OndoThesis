@@ -1,4 +1,5 @@
 <?php
+    include('../../config.php');
     $settings = new Datasettings();
     if(isset($_GET['q'])){
         $settings->$_GET['q']();
@@ -16,7 +17,7 @@
         function logs($act){            
             $date = date('m-d-Y h:i:s A');
             echo $q = "insert into log values(null,'$date','$act')";   
-            mysqli_query($q);
+            mysqli_query($con,$q);
             return true;
         }
         
@@ -27,12 +28,12 @@
             $new = sha1($_POST['new']);
             $confirm = sha1($_POST['confirm']);
             $q = "select * from userdata where username='$username' and password='$current'";
-            $r = mysqli_query($q);
+            $r = mysqli_query($con,$q);
             if(mysqli_num_rows($r) > 0){
                 if($new == $confirm){
                     $act = $username.' changed his/her password.';
                     $this->logs($act);
-                    $r2 = mysqli_query("update userdata set password='$new' where username='$username' and password='$current'");
+                    $r2 = mysqli_query($con,"update userdata set password='$new' where username='$username' and password='$current'");
                     header('location:../settings.php?msg=success&username='.$username.'');   
                 }else{
                     header('location:../settings.php?msg=error&username='.$username.'');   

@@ -1,5 +1,5 @@
 <?php
-
+    include('../../config.php');
     $class = new Dataclass();
     if(isset($_GET['q'])){
         $class->$_GET['q']();
@@ -16,14 +16,14 @@
         function logs($act){            
             $date = date('m-d-Y h:i:s A');
             echo $q = "insert into log values(null,'$date','$act')";   
-            mysqli_query($q);
+            mysqli_query($con,$q);
             return true;
         }
         
         //get all class info
         function getclass($search){
             $q = "select * from class where course like '%$search%' or year like '%$search%' or section like '%$search%' or sem like '%$search%' or subject like '%$search%' order by course,year,section,sem asc";
-            $r = mysqli_query($q);
+            $r = mysqli_query($con,$q);
             
             return $r;
         }
@@ -31,7 +31,7 @@
         //get class by ID
         function getclassbyid($id){
             $q = "select * from class where id=$id";
-            $r = mysqli_query($q);
+            $r = mysqli_query($con,$q);
             
             return $r;
         }
@@ -46,7 +46,7 @@
             $sy = $_POST['sy'];
             
             echo $q = "insert into class values('','$course','$year','$section','$sem','','$subject','$sy')";
-            mysqli_query($q);
+            mysqli_query($con,$q);
             $act = "create new class $course $year - $section with the subject of $subject";
             $this->logs($act);
             header('location:../class.php?r=added');
@@ -64,7 +64,7 @@
             $sy = $_POST['sy'];
             
             echo $q = "update class set course='$course', year='$year', section='$section', sem='$sem', subject='$subject', SY='$sy' where id=$id";
-            mysqli_query($q);
+            mysqli_query($con,$q);
             $act = "update class $course $year - $section with the subject of $subject";
             $this->logs($act);
             header('location:../class.php?r=updated');
@@ -74,11 +74,11 @@
         function getstudentsubject(){ 
             $classid = $_GET['classid'];
             $q = "select * from studentsubject where classid=$classid";
-            $r = mysqli_query($q);
+            $r = mysqli_query($con,$q);
             $result = array();
             while($row = mysqli_fetch_array($r)){
                 $q2 = 'select * from student where id='.$row['studid'].'';
-                $r2 = mysqli_query($q2);
+                $r2 = mysqli_query($con,$q2);
                 $result[] = mysqli_fetch_array($r2);
             }
             return $result;
@@ -92,18 +92,18 @@
             $verify = $this->verifystudent($studid,$classid);
             if($verify){
                 echo $q = "INSERT INTO studentsubject (studid,classid) VALUES ('$studid', '$classid');";
-                mysqli_query($q);
+                mysqli_query($con,$q);
                 header('location:../classstudent.php?r=success&classid='.$classid.'');
             }else{
                 header('location:../classstudent.php?r=duplicate&classid='.$classid.'');
             }
             
-            $tmp = mysqli_query("select * from class where id=$classid");
+            $tmp = mysqli_query($con,"select * from class where id=$classid");
             $tmp_row = mysqli_fetch_array($tmp);
             $tmp_subject = $tmp_row['subject'];
             $tmp_class = $tmp_row['course'].' '.$tmp_row['year'].'-'.$tmp_row['section'];
             
-            $tmp = mysqli_query("select * from student where id=$studid");
+            $tmp = mysqli_query($con,"select * from student where id=$studid");
             $tmp_row = mysqli_fetch_array($tmp);
             $tmp_student = $tmp_row['fname'].' '.$tmp_row['lname'];
             
@@ -114,7 +114,7 @@
         function verifystudent($studid,$classid){
             include('../../config.php');  
             $q = "select * from studentsubject where studid=$studid and classid=$classid";
-            $r = mysqli_query($q);
+            $r = mysqli_query($con,$q);
             if(mysqli_num_rows($r) < 1){
                 return true;
             }else{
@@ -127,14 +127,14 @@
             $studid = $_GET['studid'];
             include('../../config.php');  
             $q = "delete from studentsubject where studid=$studid and classid=$classid";
-            mysqli_query($q);
+            mysqli_query($con,$q);
             
-            $tmp = mysqli_query("select * from class where id=$classid");
+            $tmp = mysqli_query($con,"select * from class where id=$classid");
             $tmp_row = mysqli_fetch_array($tmp);
             $tmp_subject = $tmp_row['subject'];
             $tmp_class = $tmp_row['course'].' '.$tmp_row['year'].'-'.$tmp_row['section'];
             
-            $tmp = mysqli_query("select * from student where id=$studid");
+            $tmp = mysqli_query($con,"select * from student where id=$studid");
             $tmp_row = mysqli_fetch_array($tmp);
             $tmp_student = $tmp_row['fname'].' '.$tmp_row['lname'];
             
@@ -150,14 +150,14 @@
             $teachid = $_GET['teachid'];
             include('../../config.php'); 
             $q = "update class set teacher=$teachid where id=$classid";
-            mysqli_query($q);
+            mysqli_query($con,$q);
             
-            $tmp = mysqli_query("select * from class where id=$classid");
+            $tmp = mysqli_query($con,"select * from class where id=$classid");
             $tmp_row = mysqli_fetch_array($tmp);
             $tmp_subject = $tmp_row['subject'];
             $tmp_class = $tmp_row['course'].' '.$tmp_row['year'].'-'.$tmp_row['section'];
             
-            $tmp = mysqli_query("select * from teacher where id=$teachid");
+            $tmp = mysqli_query($con,"select * from teacher where id=$teachid");
             $tmp_row = mysqli_fetch_array($tmp);
             $tmp_teacher = $tmp_row['fname'].' '.$tmp_row['lname'];
             

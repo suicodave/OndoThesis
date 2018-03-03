@@ -3,7 +3,7 @@
     include('include/sidebar.php');
     include('data/teacher_model.php');
     include('data/data_model.php');
-    
+    include('../config.php');
     $id = $_GET['id'];
     $teacher = $teacher->getteacherbyid($id);
 ?>
@@ -51,7 +51,7 @@
                     </thead>
                     <tbody>
 <?php
-    $r1 = mysqli_query("select * from class where teacher=$id");
+    $r1 = mysqli_query($con,"select * from class where teacher=$id");
     while($row = mysqli_fetch_array($r1)):?>
             <tr>
                 <td class="text-center"><?php echo $row['subject']?></td>            

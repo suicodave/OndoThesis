@@ -2,16 +2,17 @@
     include('include/header.php');
     include('include/sidebar.php');
     include('data/teacher_model.php');
+    include('../config.php');
     $search = isset($_POST['search']) ? $_POST['search']: null;
     $teacher = $teacher->getteacher($search);
     $classid = $_GET['classid'];
 
     $teacherid = $_GET['teacherid'];
-    $rt = mysqli_query("select * from teacher where id=$teacherid");
+    $rt = mysqli_query($con,"select * from teacher where id=$teacherid");
     $rs = mysqli_fetch_array($rt);
     $teacherbyid = $rs['fname'].' '.$rs['lname'];
     
-    $rc = mysqli_query("select * from class where id=$classid");
+    $rc = mysqli_query($con,"select * from class where id=$classid");
     $rc = mysqli_fetch_array($rc);
     $subject = $rc['subject'];
     

@@ -1,5 +1,5 @@
 <?php
-
+    include('../config.php');
     $teacher = new Datateacher();
     if(isset($_GET['q'])){
         $teacher->$_GET['q']();
@@ -16,14 +16,14 @@
         function logs($act){            
             $date = date('m-d-Y h:i:s A');
             echo $q = "insert into log values(null,'$date','$act')";   
-            mysqli_query($q);
+            mysqli_query($con,$q);
             return true;
         }
         
         //get all teacher info
         function getteacher($search){
             $q = "select * from teacher where teachid like '%$search%' or fname like '%$search%' or lname like '%$search%' order by lname,fname,teachid";
-            $r = mysqli_query($q);
+            $r = mysqli_query($con,$q);
             
             return $r;
         }
@@ -31,7 +31,7 @@
         //get teacher by ID
         function getteacherbyid($id){
             $q = "select * from teacher where id=$id";
-            $r = mysqli_query($q);
+            $r = mysqli_query($con,$q);
             
             return $r;
         }
@@ -43,7 +43,7 @@
             $lname = $_POST['lname'];
             
             $q = "insert into teacher values('','$teachid','$fname','$lname')";
-            mysqli_query($q);
+            mysqli_query($con,$q);
             
             $name = $fname.' '.$lname;
             $act = "add new teacher $name";
@@ -60,7 +60,7 @@
             $fname = $_POST['fname'];
             $lname = $_POST['lname'];
             $q = "update teacher set teachid='$teachid', fname='$fname', lname='$lname' where id=$id";
-            mysqli_query($q);
+            mysqli_query($con,$q);
             
             $name = $fname.' '.$lname;
             $act = "update teacher $name";
@@ -74,15 +74,15 @@
             include('../../config.php');
             $classid = $_GET['classid'];
             $teachid = $_GET['teachid'];
-            mysqli_query("update class set teacher=null where id=$classid");
+            mysqli_query($con,"update class set teacher=null where id=$classid");
             header('location:../teacherload.php?id='.$teachid.'');
             
-            $tmp = mysqli_query("select * from class where id=$classid");
+            $tmp = mysqli_query($con,"select * from class where id=$classid");
             $tmp_row = mysqli_fetch_array($tmp);
             $tmp_subject = $tmp_row['subject'];
             $tmp_class = $tmp_row['course'].' '.$tmp_row['year'].'-'.$tmp_row['section'];
             
-            $tmp = mysqli_query("select * from teacher where id=$teachid");
+            $tmp = mysqli_query($con,"select * from teacher where id=$teachid");
             $tmp_row = mysqli_fetch_array($tmp);
             $tmp_teacher = $tmp_row['fname'].' '.$tmp_row['lname'];
             
