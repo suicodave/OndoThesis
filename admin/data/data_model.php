@@ -15,21 +15,21 @@
         function logs($act){            
             $date = date('m-d-Y h:i:s A');
             echo $q = "insert into log values(null,'$date','$act')";   
-            mysql_query($q);
+            mysqli_query($q);
             return true;
         }
         
         //get all subjects
         function getsubject($search){
             $q = "select * from subject where code like '%$search%' or title like '%$search%' order by code asc";
-            $r = mysql_query($q);
+            $r = mysqli_query($q);
             
             return $r;
         }
         //get subject by ID
         function getsubjectbyid($id){
             $q = "select * from subject where id=$id";
-            $r = mysql_query($q);
+            $r = mysqli_query($q);
             
             return $r;
         }
@@ -40,7 +40,7 @@
             $title = $_POST['title'];
             $unit = $_POST['unit'];
             $q = "insert into subject values('','$code','$title','$unit')";
-            mysql_query($q);
+            mysqli_query($q);
             
             $act = "add new subject $code - $title";
             $this->logs($act);
@@ -55,7 +55,7 @@
             $title = $_POST['title'];
             $unit = $_POST['unit'];
             $q = "update subject set code='$code', title='$title',unit=$unit where id=$id";
-            mysql_query($q);
+            mysqli_query($q);
             
             $act = "update subject $code - $title";
             $this->logs($act);
@@ -70,10 +70,10 @@
             $q = "delete from $table where id=$id";
             $r = null;
             
-            $tmp = mysql_query("select * from $table where id=$id");
-            $tmp_row = mysql_fetch_array($tmp);
+            $tmp = mysqli_query("select * from $table where id=$id");
+            $tmp_row = mysqli_fetch_array($tmp);
             
-            mysql_query($q);
+            mysqli_query($q);
             
             if($table=='subject'){
                 $record = $tmp_row['code'];

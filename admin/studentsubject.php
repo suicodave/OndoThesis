@@ -33,7 +33,7 @@
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-12">
-                <?php while($row = mysql_fetch_array($student)): ?>
+                <?php while($row = mysqli_fetch_array($student)): ?>
                 <h4>Student ID : <?php echo $row['studid']; ?></h4>
                 <h4>Name : <?php echo $row['fname'].' '.$row['lname']; ?></h4>
                 <?php endwhile; ?>
@@ -51,14 +51,14 @@
                     </thead>
                     <tbody>
 <?php
-    $r1 = mysql_query("select * from studentsubject where studid=$id");
-    while($row = mysql_fetch_array($r1)):
-        $r2 = mysql_query('select * from class where id='.$row['classid'].'');
-        while($rows = mysql_fetch_array($r2)):
-            $r3 = mysql_query('select * from teacher where id='.$rows['teacher'].'');
+    $r1 = mysqli_query("select * from studentsubject where studid=$id");
+    while($row = mysqli_fetch_array($r1)):
+        $r2 = mysqli_query('select * from class where id='.$row['classid'].'');
+        while($rows = mysqli_fetch_array($r2)):
+            $r3 = mysqli_query('select * from teacher where id='.$rows['teacher'].'');
             $teacher = null;
             if($r3){
-                 $teacher = mysql_fetch_array($r3);
+                 $teacher = mysqli_fetch_array($r3);
                 $teacher = $teacher['fname'].' '.$teacher['lname'];
             }?>
            

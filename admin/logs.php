@@ -31,9 +31,9 @@
                     </div>
                     <div class="panel-body">
                         <div class="list-group">
-                            <?php $r = mysql_query("select * from log order by date desc limit 0,100");?>
+                            <?php $r = mysqli_query("select * from log order by date desc limit 0,100");?>
 
-                            <?php while($row = mysql_fetch_array($r)): ?>       
+                            <?php while($row = mysqli_fetch_array($r)): ?>       
                             <a href="#" class="list-group-item">
                                 <span class="badge"><?php echo $row['date']?></span>
                                 <i class="fa fa-fw fa-tasks"></i> <?php echo $row['activity']?>

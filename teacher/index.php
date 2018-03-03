@@ -4,19 +4,19 @@
 
     $tmp = $_SESSION['id'];
     $q = "select * from teacher where teachid='$tmp'";
-    $r = mysql_query($q);
-    $result = mysql_fetch_array($r);
+    $r = mysqli_query($q);
+    $result = mysqli_fetch_array($r);
     $teachid = $result[0];
 
-    $r1 = mysql_query("select count(*) from class where teacher=$teachid");
-    $count1 = mysql_fetch_array($r);
+    $r1 = mysqli_query("select count(*) from class where teacher=$teachid");
+    $count1 = mysqli_fetch_array($r);
 
-    $r2 = mysql_query("select * from class where teacher=$teachid");
+    $r2 = mysqli_query("select * from class where teacher=$teachid");
     $students = 0;
-    while($row = mysql_fetch_array($r)){
+    while($row = mysqli_fetch_array($r)){
         $id = $row['id'];   
-        $r3 = mysql_query("select count(*) from studentsubject where classid=$id");
-        $count3 = mysql_fetch_array($r3);
+        $r3 = mysqli_query("select count(*) from studentsubject where classid=$id");
+        $count3 = mysqli_fetch_array($r3);
         $students = $students + $count3[0];
     }
 

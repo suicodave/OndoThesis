@@ -2,7 +2,7 @@
   /* Student Grade System
      Author : Jake R. Pomperada
   Date   : October 5, 2011 Wednesday
-  Tool   : PHP/MySQL
+  Tool   : PHP/mysqli
  */  
 
   // Block any possible error from the browser
@@ -71,12 +71,12 @@ $endterm = $_REQUEST['endterm'];
 $remarks = strtoupper($_REQUEST['remarks']);
 
 //CONNECT TO DATABASE--------------------
-$con = mysql_connect("localhost","root","");
+$con = mysqli_connect("localhost","root","");
 if (!$con)
   {
-  die('Could not connect: ' . mysql_error());
+  die('Could not connect: ' . mysqli_error());
   }
-mysql_select_db("grade", $con);
+mysqli_select_db("grade", $con);
    
 /*
  *  Specify the field names that are in the form. This is meant 
@@ -144,8 +144,8 @@ if(count($errors) > 0)
   $sql .= "('$name', '$course', '$subject', '$department', '$sex'";
   $sql .= " ,'$contact','$prelim','$midterm','$final','$endterm','$remarks')";
   
-   if(!$b=mysql_query($sql)){
-    echo mysql_error();
+   if(!$b=mysqli_query($sql)){
+    echo mysqli_error();
    }
    else {
         echo "<center>";

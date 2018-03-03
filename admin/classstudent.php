@@ -8,8 +8,8 @@
     $studentsubject = $class->getstudentsubject();
     $classid = $_GET['classid'];
     
-    $rc = mysql_query("select * from class where id=$classid");
-    $rc = mysql_fetch_array($rc);
+    $rc = mysqli_query("select * from class where id=$classid");
+    $rc = mysqli_fetch_array($rc);
     $subject = $rc['subject'];
 
 ?>
@@ -64,7 +64,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php while($row = mysql_fetch_array($student)): ?>
+                                <?php while($row = mysqli_fetch_array($student)): ?>
                                 <tr>
                                     <td><?php echo $row['studid']; ?></td>
                                     <td><?php echo $row['fname']; ?></td>
@@ -72,7 +72,7 @@
                                     <td class="text-center"><a href="data/class_model.php?q=addstudent&studid=<?php echo $row['id']; ?>&classid=<?php echo $classid;?>" class="btn btn-warning">Add to class</a></td>     
                                 </tr>
                                 <?php endwhile;?>
-                                <?php if(mysql_num_rows($student) < 1): ?>
+                                <?php if(mysqli_num_rows($student) < 1): ?>
                                     <tr>
                                         <td colspan="4" class="text-center text-danger"><strong>*** NO RESULT ***</strong></td>
                                     </tr>

@@ -33,7 +33,7 @@
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-12">
-                <?php while($row = mysql_fetch_array($teacher)): ?>
+                <?php while($row = mysqli_fetch_array($teacher)): ?>
                 <h4>Teacher ID : <?php echo $row['teachid']; ?></h4>
                 <h4>Name : <?php echo $row['fname'].' '.$row['lname']; ?></h4>
                 <?php endwhile; ?>
@@ -51,8 +51,8 @@
                     </thead>
                     <tbody>
 <?php
-    $r1 = mysql_query("select * from class where teacher=$id");
-    while($row = mysql_fetch_array($r1)):?>
+    $r1 = mysqli_query("select * from class where teacher=$id");
+    while($row = mysqli_fetch_array($r1)):?>
             <tr>
                 <td class="text-center"><?php echo $row['subject']?></td>            
                 <td class="text-center"><a href="classstudent.php?classid=<?php echo $row['id']?>" target="_blank">View</a></td>     

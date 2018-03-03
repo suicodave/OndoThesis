@@ -65,7 +65,7 @@ class Edit {
         </ol>
         <hr />
         <div class="modal-body">
-            <?php while($row = mysql_fetch_array($subject)): ?>
+            <?php while($row = mysqli_fetch_array($subject)): ?>
             <form action="data/data_model.php?q=updatesubject&id=<?php echo $row['id'];?>" method="post">
             
                 <div class="form-group">
@@ -104,14 +104,14 @@ class Edit {
         </ol>
         <hr />
         <div class="modal-body">
-            <?php while($row = mysql_fetch_array($class)): ?>
+            <?php while($row = mysqli_fetch_array($class)): ?>
             <form action="data/class_model.php?q=updateclass&id=<?php echo $row['id']?>" method="post">
                 <div class="form-group">  
                     <select name="subject" class="form-control" required>
                         <option value="">Select Subject...</option>
                     <?php 
-                        $r = mysql_query("select * from subject");
-                        while($re = mysql_fetch_array($r)):
+                        $r = mysqli_query("select * from subject");
+                        while($re = mysqli_fetch_array($r)):
                     ?>  
                         <option <?php  if($row['subject'] == $re['code']) echo "selected"?> value="<?php echo $re['code']; ?>"><?php echo $re['code']; ?> - (<?php echo $re['title']; ?>)</option>
                     <?php endwhile; ?>
@@ -188,7 +188,7 @@ class Edit {
         </ol>
         <hr />
         <div class="modal-body">
-            <?php while($row = mysql_fetch_array($student)): ?>
+            <?php while($row = mysqli_fetch_array($student)): ?>
             <form action="data/student_model.php?q=updatestudent&id=<?php echo $row['id'];?>" method="post">
                 <div class="form-group">
                     <input type="text" class="form-control" name="studid" value="<?php echo $row['studid']; ?>" />
@@ -225,7 +225,7 @@ class Edit {
         </ol>
         <hr />
         <div class="modal-body">
-            <?php while($row = mysql_fetch_array($teacher)): ?>
+            <?php while($row = mysqli_fetch_array($teacher)): ?>
             <form action="data/teacher_model.php?q=updateteacher&id=<?php echo $row['id'];?>" method="post">
                 <div class="form-group">
                     <input type="text" class="form-control" name="teachid" value="<?php echo $row['teachid']; ?>" />

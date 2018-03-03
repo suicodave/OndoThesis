@@ -80,7 +80,7 @@
                         </thead>
                         <tbody>
                             <?php $c = 1; ?>
-                            <?php while($row = mysql_fetch_array($class)): ?>                            
+                            <?php while($row = mysqli_fetch_array($class)): ?>                            
                                 <tr>
                                     <td><?php echo $c;?></td>
                                     <td><?php echo $row['subject'];?></td>
@@ -95,7 +95,7 @@
                                 </tr>
                             <?php $c++; ?>
                             <?php endwhile; ?>
-                            <?php if(mysql_num_rows($class) < 1): ?>
+                            <?php if(mysqli_num_rows($class) < 1): ?>
                                 <tr>
                                     <td colspan="7" class="bg-danger text-danger text-center">*** EMPTY ***</td>
                                 </tr>

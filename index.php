@@ -4,9 +4,9 @@
         $user = $_POST['user'];
         $pass = $_POST['pass'];
         $query = "select * from userdata where username='$user' and password='$pass'";
-        $r = mysql_query($query);
-        if(mysql_num_rows($r) == 1){
-            $row = mysql_fetch_assoc($r);
+        $r = mysqli_query($query);
+        if(mysqli_num_rows($r) == 1){
+            $row = mysqli_fetch_assoc($r);
             $_SESSION['level'] = $row['level'];
             $_SESSION['id'] = $row['username'];
             $_SESSION['name'] = $row['fname'].' '.$row['lname'];

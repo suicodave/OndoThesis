@@ -7,12 +7,12 @@
     $classid = $_GET['classid'];
 
     $teacherid = $_GET['teacherid'];
-    $rt = mysql_query("select * from teacher where id=$teacherid");
-    $rs = mysql_fetch_array($rt);
+    $rt = mysqli_query("select * from teacher where id=$teacherid");
+    $rs = mysqli_fetch_array($rt);
     $teacherbyid = $rs['fname'].' '.$rs['lname'];
     
-    $rc = mysql_query("select * from class where id=$classid");
-    $rc = mysql_fetch_array($rc);
+    $rc = mysqli_query("select * from class where id=$classid");
+    $rc = mysqli_fetch_array($rc);
     $subject = $rc['subject'];
     
     
@@ -79,7 +79,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php while($row = mysql_fetch_array($teacher)): ?>
+                                <?php while($row = mysqli_fetch_array($teacher)): ?>
                                 <tr>
                                     <td><?php echo $row['teachid']; ?></td>
                                     <td><?php echo $row['fname']; ?></td>
@@ -87,7 +87,7 @@
                                     <td class="text-center"><a href="data/class_model.php?q=updateteacher&teachid=<?php echo $row['id']; ?>&classid=<?php echo $classid;?>" class="btn btn-warning">Make as Teacher</a></td>     
                                 </tr>
                                 <?php endwhile;?>
-                                <?php if(mysql_num_rows($teacher) < 1): ?>
+                                <?php if(mysqli_num_rows($teacher) < 1): ?>
                                     <tr>
                                         <td colspan="4" class="text-center text-danger"><strong>*** NO RESULT ***</strong></td>
                                     </tr>

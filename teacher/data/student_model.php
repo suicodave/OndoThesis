@@ -15,13 +15,13 @@
         
         function getstudentbyclass($classid){
             $q = "select * from studentsubject where classid=$classid";
-            $r = mysql_query($q);
+            $r = mysqli_query($q);
             $student = array();
             if($classid != null){
-               while($row = mysql_fetch_array($r)){
+               while($row = mysqli_fetch_array($r)){
                     $q2 = 'select * from student where id='.$row['studid'].'';  
-                    $r2 = mysql_query($q2);
-                    $student[] = mysql_fetch_array($r2);    
+                    $r2 = mysqli_query($q2);
+                    $student[] = mysqli_fetch_array($r2);    
                 } 
             }
             return $student;
@@ -29,12 +29,12 @@
         
         function getstudentbysearch($classid,$search){
             $q = "select * from student where fname like '%$search%' or lname like '%$search%' or studid like '%$search%'";
-            $r = mysql_query($q);
+            $r = mysqli_query($q);
             $student = array();
-            while($row = mysql_fetch_array($r)){
+            while($row = mysqli_fetch_array($r)){
                 $q2 = 'select * from studentsubject where studid='.$row['id'].' and classid='.$classid.'';  
-                $r2 = mysql_query($q2);
-                if(mysql_num_rows($r2) > 0) {
+                $r2 = mysqli_query($q2);
+                if(mysqli_num_rows($r2) > 0) {
                     $student[] = $row;
                 }
 
@@ -44,8 +44,8 @@
         
         function getstudentgrade($studid,$classid){
             $q = "select * from studentsubject where studid='$studid' and classid='$classid'";
-            $r = mysql_query($q);
-            if($row = mysql_fetch_array($r)){
+            $r = mysqli_query($q);
+            if($row = mysqli_fetch_array($r)){
                 $att1 = ($row['att1']) * .10;   
                 $att2 = ($row['att2']) * .10;   
                 $att3 = ($row['att3']) * .10;
@@ -108,9 +108,9 @@
         
         function getstudentbyid($studid){
             $q = "select * from student where id=$studid";   
-            $r = mysql_query($q);
+            $r = mysqli_query($q);
             $data = array();
-            $data[] = mysql_fetch_array($r);
+            $data[] = mysqli_fetch_array($r);
             return $data;
         }
         

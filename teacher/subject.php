@@ -51,7 +51,7 @@
                                 </thead>
                                 <tbody>
                                     <?php $c = 1; ?>
-                                    <?php while($row = mysql_fetch_array($firstsem)): ?>
+                                    <?php while($row = mysqli_fetch_array($firstsem)): ?>
                                         <tr>
                                             <td><?php echo $c; ?></td>
                                             <td class="text-center"><?php echo $row['subject']; ?></td>
@@ -61,7 +61,7 @@
                                         </tr>
                                     <?php $c++; ?>
                                     <?php endwhile; ?>
-                                    <?php if(mysql_num_rows($firstsem) < 1): ?>
+                                    <?php if(mysqli_num_rows($firstsem) < 1): ?>
                                         <tr><td colspan="6" class="text-center text-danger"><strong>*** EMPTY ***</strong></td></tr>
                                     <?php endif;?>
                                 </tbody>
@@ -84,7 +84,7 @@
                                 </thead>
                                 <tbody>
                                     <?php $c = 1; ?>
-                                    <?php while($row = mysql_fetch_array($secondsem)): ?>
+                                    <?php while($row = mysqli_fetch_array($secondsem)): ?>
                                         <tr>
                                             <td><?php echo $c; ?></td>
                                             <td class="text-center"><?php echo $row['subject']; ?></td>
@@ -94,7 +94,7 @@
                                         </tr>
                                     <?php $c++; ?>
                                     <?php endwhile; ?>
-                                    <?php if(mysql_num_rows($secondsem) < 1): ?>
+                                    <?php if(mysqli_num_rows($secondsem) < 1): ?>
                                         <tr><td colspan="6" class="text-center text-danger"><strong>*** EMPTY ***</strong></td></tr>
                                     <?php endif;?>
                                 </tbody>

@@ -14,26 +14,26 @@
         
         function getsubject($sem,$id){
             $q = "select * from class where teacher=$id and sem='$sem' order by subject asc";   
-            $r = mysql_query($q);
+            $r = mysqli_query($q);
             return $r;
         }
         
         function getallsubject($id){
             $q = "select * from class where teacher=$id order by subject asc";   
-            $r = mysql_query($q);
+            $r = mysqli_query($q);
             return $r;
         }
         
         function getsubjectbyid($id){
             $q = "select * from class where id=$id";   
-            $r = mysql_query($q);
+            $r = mysqli_query($q);
             return $r;
         }
         
         function getsubjectbycode($code){
             $q = "select * from subject where code='$code'";
-            $r = mysql_query($q);
-            $data = mysql_fetch_array($r);
+            $r = mysqli_query($q);
+            $data = mysqli_fetch_array($r);
             return $data;
         }
     }

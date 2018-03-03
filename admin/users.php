@@ -55,7 +55,7 @@
                             <th>Remove</th>    
                         </tr></thead>
                         <tbody>
-                        <?php while($row = mysql_fetch_array($user)): ?>
+                        <?php while($row = mysqli_fetch_array($user)): ?>
                             <tr>
                                 <td><?php echo $row['username'];?></td>
                                 <td><?php echo $row['lname'].', '.$row['fname'];?></td>

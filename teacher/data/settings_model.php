@@ -16,7 +16,7 @@
         function logs($act){            
             $date = date('m-d-Y h:i:s A');
             echo $q = "insert into log values(null,'$date','$act')";   
-            mysql_query($q);
+            mysqli_query($q);
             return true;
         }
         
@@ -27,12 +27,12 @@
             $new = sha1($_POST['new']);
             $confirm = sha1($_POST['confirm']);
             $q = "select * from userdata where username='$username' and password='$current'";
-            $r = mysql_query($q);
-            if(mysql_num_rows($r) > 0){
+            $r = mysqli_query($q);
+            if(mysqli_num_rows($r) > 0){
                 if($new == $confirm){
                     $act = $username.' changed his/her password.';
                     $this->logs($act);
-                    $r2 = mysql_query("update userdata set password='$new' where username='$username' and password='$current'");
+                    $r2 = mysqli_query("update userdata set password='$new' where username='$username' and password='$current'");
                     header('location:../settings.php?msg=success&username='.$username.'');   
                 }else{
                     header('location:../settings.php?msg=error&username='.$username.'');   

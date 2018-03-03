@@ -77,7 +77,7 @@
                         </thead>
                         <tbody>
                             <?php $c = 1; ?>
-                            <?php while($row = mysql_fetch_array($subject)): ?>                            
+                            <?php while($row = mysqli_fetch_array($subject)): ?>                            
                                 <tr>
                                     <td><?php echo $c;?></td>
                                     <td><a href="edit.php?type=subject&id=<?php echo $row['id']?>"><?php echo $row['code'];?></a></td>
@@ -87,7 +87,7 @@
                                 </tr>
                             <?php $c++; ?>
                             <?php endwhile; ?>
-                            <?php if(mysql_num_rows($subject) < 1): ?>
+                            <?php if(mysqli_num_rows($subject) < 1): ?>
                                 <tr>
                                     <td colspan="5" class="bg-danger text-danger text-center">*** EMPTY ***</td>
                                 </tr>

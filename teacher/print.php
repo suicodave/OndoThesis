@@ -5,8 +5,8 @@
     include('data/student_model.php');
     $id = $_SESSION['id'];
     $q = "select * from teacher where teachid='$id'";
-    $r = mysql_query($q);
-    if($row = mysql_fetch_array($r)){
+    $r = mysqli_query($q);
+    if($row = mysqli_fetch_array($r)){
         $teacher = $row['fname'].' '.$row['lname'];
     }
     $classid = $_GET['classid'];
@@ -59,7 +59,7 @@
                 <div class="text-center">                    
                     <h3>Grade Sheet</h3> 
                     <hr />
-                    <?php while($row = @mysql_fetch_array($mysubject)): ?>
+                    <?php while($row = @mysqli_fetch_array($mysubject)): ?>
                     <?php $mysubjectname = $subject->getsubjectbycode($row['subject']); ?>
                     <table class="table">
                         <tr>

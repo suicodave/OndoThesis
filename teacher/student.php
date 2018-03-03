@@ -44,7 +44,7 @@
                         <input type="text" class="form-control" name="search" placeholder="Search by ID or Name">
                         <select name="subject" class="form-control" required>
                             <option value="">Select Subject...</option>                            
-                            <?php while($row = mysql_fetch_array($mysubject)): ?>
+                            <?php while($row = mysqli_fetch_array($mysubject)): ?>
                                 <option value="<?php echo $row['id']?>" <?php if($row['id']==$classid) echo 'selected'; ?>><?php echo $row['subject'];?></option>
                             <?php endwhile; ?>
                         </select>
